@@ -6,6 +6,10 @@ using System;
 
 public static class GameInstallChecker
 {
+
+    readonly static string folderName = "MetaWare High School (Demo)";
+    readonly static string fileName = "MetaWareHighSchoolDemo.exe";
+
     public static void GetPath(Action<string> result)
     {
         if (IsInstalledOnSteam(out string path))
@@ -36,7 +40,7 @@ public static class GameInstallChecker
 
         try
         {
-            path = gameLocator.getGameInfoByFolder("MetaWare High School (Demo)").steamGameLocation;
+            path = gameLocator.getGameInfoByFolder(folderName).steamGameLocation;
         }
         catch (DirectoryNotFoundException)
         {
@@ -48,5 +52,5 @@ public static class GameInstallChecker
         return true;
     }
 
-    static bool HasGameExe(string pathToFolder) => File.Exists(pathToFolder + "/MetaWareHighSchoolDemo.exe");
+    static bool HasGameExe(string pathToFolder) => File.Exists(pathToFolder + "/" + fileName);
 }
