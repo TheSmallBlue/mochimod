@@ -422,7 +422,7 @@ GameObject:
   - component: {fileID: 7464635076088537413}
   - component: {fileID: 7464635076088537414}
   - component: {fileID: 7464635076088537412}
-  - component: {fileID: 7464635076088537411}
+  - component: {fileID: 1104014637891921622}
   m_Layer: 0
   m_Name: ListedMod
   m_TagString: ListedMod
@@ -533,20 +533,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7464635076088537414}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7464635076088537411}
-        m_TargetAssemblyTypeName: ListedModScript, Assembly-CSharp
-        m_MethodName: SetSelected
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &7464635076088537411
+      m_Calls: []
+--- !u!114 &1104014637891921622
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -555,8 +543,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7464635076088537416}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b4aff39ed2a14640baf4f3a6853b4b2, type: 3}
+  m_Script: {fileID: 11500000, guid: 725ef301db4710e4ba006355d435c4f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  modLoader: {fileID: 0}
-  darkOverlay: {fileID: 0}
+  modName: {fileID: 7464635074500321145}
+  modDescription: {fileID: 7464635074425706347}
+  modAuthor: {fileID: 7464635074640240505}
