@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class ModBuilder : MonoBehaviour
@@ -39,6 +40,16 @@ public class ModBuilder : MonoBehaviour
     // Result: folder with an info.json file, and a game folder that only contains modified/different files.
     // What do we do with those files? TODO.
 
+    [DllImport("kernel32.dll")]
+    static extern bool CreateSymbolicLink(
+        string lpSymlinkFileName, string lpTargetFileName, SymbolicLink dwFlags);
+
+    enum SymbolicLink
+    {
+        File = 0,
+        Directory = 1
+    }
+
 
     private void Update() 
     {
@@ -57,6 +68,28 @@ public class ModBuilder : MonoBehaviour
                     var modHash = JsonUtility.ToJson(FileHasher.HashDirectory(pth2));
 
                     CompareHashes(gameHash, modHash);
+                });
+            });
+        }
+
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            PopUpManager.Instance.Create<PathPopUp>()
+            .SetText<PathPopUp>("Path in which to create SymLink")
+            .OnSubmit(pth =>
+            {
+                var symlinkPath = pth;
+
+                PopUpManager.Instance.Create<PathPopUp>()
+                .SetText<PathPopUp>("File to SymLink")
+                .OnSubmit(pth2 =>
+                {
+                    var symlinkFile = pth2;
+
+                    if(!CreateSymbolicLink(pth2, pth, SymbolicLink.File))
+                    {
+                        Debug.Log(Marshal.GetLastWin32Error());
+                    }
                 });
             });
         }
