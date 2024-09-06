@@ -45,6 +45,8 @@ public class PathPopUp : PopUp
 
     public void Submit()
     {
+        if(_path == "") return;
+        
         submitDelegate(_path);
 
         Close();

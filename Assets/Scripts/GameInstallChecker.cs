@@ -7,7 +7,6 @@ using UnityEngine;
 
 public static class GameInstallChecker
 {
-    readonly static string prefsPathKey = "GamePath";
     readonly static string folderName = "MetaWare High School (Demo)";
     readonly static string fileName = "MetaWareHighSchoolDemo.exe";
 
@@ -19,17 +18,17 @@ public static class GameInstallChecker
     {
         // Check if we have the path already saved
         // If we do, check if this path has the game's EXE in it still
-        if(PlayerPrefs.HasKey(prefsPathKey) && HasGameExe(PlayerPrefs.GetString(prefsPathKey)))
+        if(PlayerPrefs.HasKey("GamePath") && HasGameExe(PlayerPrefs.GetString("GamePath")))
         {
             Debug.Log("Path loaded from prefs");
-            result(PlayerPrefs.GetString(prefsPathKey));
+            result(PlayerPrefs.GetString("GamePath"));
             return;
         }
 
         // We don't know where the game is! We check to see if it's installed on steam
         if (IsInstalledOnSteam(out string path))
         {
-            PlayerPrefs.SetString(prefsPathKey, path); 
+            PlayerPrefs.SetString("GamePath", path); 
             result(path);
             return;
         }

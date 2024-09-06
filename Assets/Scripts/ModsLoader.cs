@@ -45,6 +45,8 @@ public class ModsLoader : MonoBehaviour
         // Loop through each folder inside the mods folder
         foreach (string modDirectory in Directory.GetDirectories(ModsPath))
         {
+            // Does the folder have a game sub-folder?
+            if(!Directory.Exists(modDirectory + "\\game")) continue;
 
             // Does the folder have an info.json file?
             if (Directory.GetFiles(modDirectory).FirstOrDefault(x => x == modDirectory + "\\info.json") == null) continue;
@@ -55,21 +57,6 @@ public class ModsLoader : MonoBehaviour
 
             // Create the item on the list then!
             Instantiate(modPrefab, modListParent).SetFields(modInfo);
-        }
-    }
-
-    private void Update() 
-    {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            ModInfo info = new ModInfo()
-            {
-                name = "Fart mod",
-                author = "Nobody knows....",
-                description = "A mod about farts, I think?"
-            };
-
-            File.WriteAllText(ModsPath + "\\info.json", JsonUtility.ToJson(info));
         }
     }
 }
