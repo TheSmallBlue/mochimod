@@ -6,6 +6,4 @@ using UnityEngine;
 public class ModInfo
 {
     public string name, description, author;
-
-    public HashedFile hashes;
 }

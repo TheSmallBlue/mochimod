@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
+using UnityEngine.UI;
 
+[RequireComponent(typeof(ModPlayer))]
 public class ModsLoader : MonoBehaviour
 {
-    [SerializeField] RectTransform modListParent;
+    [FormerlySerializedAs("modListParent")]
+    public RectTransform ModListParent;
     [SerializeField] ListedMod modPrefab;
 
     public static string GamePath;
@@ -28,11 +32,11 @@ public class ModsLoader : MonoBehaviour
     public void LoadMods()
     {
         // If the modlist already has entries, we delete them!
-        if(modListParent.childCount != 0)
+        if(ModListParent.childCount > 1)
         {
-            for (int i = 0; i < modListParent.childCount; i++)
+            for (int i = 1; i < ModListParent.childCount; i++)
             {
-                Destroy(modListParent.GetChild(i).gameObject);
+                Destroy(ModListParent.GetChild(i).gameObject);
             }
         }
 
@@ -56,7 +60,10 @@ public class ModsLoader : MonoBehaviour
             if (modInfo == null) continue;
 
             // Create the item on the list then!
-            Instantiate(modPrefab, modListParent).SetFields(modInfo);
+            var newItem = Instantiate(modPrefab, ModListParent);
+            newItem.SetFields(modInfo);
+            newItem.SetPath(modDirectory);
+            newItem.GetComponent<Button>().onClick.AddListener( () => GetComponent<ModPlayer>().PlayMod(newItem) );
         }
     }
 }
